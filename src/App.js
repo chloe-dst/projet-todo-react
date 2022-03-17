@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import ToDo from "./ToDo";
+import Form from "./Form";
 
 function App() {
+  const [todos, setTodos] = useState([
+    {
+      id: 1, 
+      title:'Récupérer cours React', 
+      content:'Récupérer cours React bla bla bla bla', 
+      complete: false
+    },
+    {
+      id: 2, 
+      title:'Faire exercice React', 
+      content:'Faire exercice React bla bla bla', 
+      complete: false
+    }
+  ]);
+  
+  function toggleTodos(id){
+    console.log('La checkbox a été cliqué');
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Ma liste à faire</h1>
+      <div>
+        {todos.map( todos => (
+          <ToDo title={todos.title} content={todos.content} key={Math.random()}/>
+        ))}
+        <Form setTodos={setTodos}/>
+      </div>
+    </>
   );
 }
 
